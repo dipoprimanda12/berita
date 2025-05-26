@@ -480,27 +480,3 @@ img:hover {
   transform: scale(1.03);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
-.search-form {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.search-form input {
-  padding: 6px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.search-form button {
-  padding: 6px 12px;
-  background-color: #2d89ef;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.search-form button:hover {
-  background-color: #1a5bb8;
-}
