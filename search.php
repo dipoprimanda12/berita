@@ -7,15 +7,15 @@ if ($q === '') {
   die("Masukkan kata kunci pencarian.");
 }
 
-// Gunakan LIKE untuk mencari di beberapa kolom
+// Gunakan LIKE dan LOWER agar pencarian tidak case sensitive
 $sql = "SELECT * FROM artikel 
-        WHERE judul LIKE ? 
-        OR konten LIKE ? 
-        OR kategori LIKE ? 
-        OR tanggal LIKE ?
+        WHERE LOWER(judul) LIKE LOWER(?) 
+        OR LOWER(konten) LIKE LOWER(?) 
+        OR LOWER(kategori) LIKE LOWER(?) 
+        OR LOWER(tanggal) LIKE LOWER(?)
         ORDER BY tanggal DESC";
 $stmt = $koneksi->prepare($sql);
-$param = "%$q%";
+$param = '%' . $q . '%';
 $stmt->bind_param("ssss", $param, $param, $param, $param);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -33,7 +33,7 @@ $result = $stmt->get_result();
 <header class="navbar">
   <div class="logo"><a href="index.php">BeritaKita</a></div>
   <form action="search.php" method="GET" class="search-form">
-    <input type="text" name="q" value="<?= htmlspecialchars($q) ?>" placeholder="Cari berita..." required />
+    <input type="text" name="q" value="<?= htmlspecialchars($q) ?>" placeholder="Cari berita atau kategori..." required />
     <button type="submit">Cari</button>
   </form>
 </header>
@@ -60,9 +60,11 @@ $result = $stmt->get_result();
     <p>Tidak ada hasil untuk kata kunci "<strong><?= htmlspecialchars($q) ?></strong>".</p>
   <?php endif; ?>
 </main>
+
 <div>
-    <a href="index.php" class="btn-back">← Kembali</a>
-  </div>
+  <a href="index.php" class="btn-back">← Kembali</a>
+</div>
+
 <footer class="footer">
   <p>&copy; 2025 BeritaKita</p>
 </footer>

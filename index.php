@@ -31,7 +31,7 @@ if (!$berita_utama) {
 <body>
 
   <header class="navbar">
-    <div class="logo">BeritaKita</div>
+    <strong><div class="logo">Berita <span> Kita</span></div></strong>
     <nav>
       <ul class="nav-links">
         <!-- Tombol Home: arahkan ke file index.php -->
